@@ -19,6 +19,27 @@ A user can create, update, and delete allowance entries. They can also view a li
 * How to perform basic CRUD operations on the database using the Spring Rest API
 * How to test and map controller routes with Postman
 
+## API Routes
+# View a list of all allowance entries
+Type: GET
+Mapping: allowances
+
+# View a single allowance entry by ID
+Type: GET
+Mapping: allowances/{id}
+
+# Create a new allowance entry
+Type: POST
+Mapping: allowances
+
+# Update an existing allowance entry by ID
+Type: PATCH
+Mapping: allowances/{id}
+
+# Delete an existing allowance entry by ID
+Type: DELETE
+Mapping: allowances/{id}
+
 
 ### Technologies Used
 * Java
