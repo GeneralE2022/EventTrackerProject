@@ -13,6 +13,14 @@ repositories {
 	mavenCentral()
 }
 
+war {
+  // Gradle will replace the variable archivesBaseName
+  // with our app name, as defined in settings.gradle
+  archiveFileName = "${archivesBaseName}.war"
+  destinationDirectory = file("../")     // Project workspace directory
+}
+
+
 dependencies {
 	implementation project (':AllowanceJPA')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -22,6 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+	tasks.named('test') {
+		useJUnitPlatform()
 }
+

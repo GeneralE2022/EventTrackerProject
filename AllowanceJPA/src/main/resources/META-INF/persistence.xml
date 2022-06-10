@@ -6,7 +6,7 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<!-- begin entities -->
-		<class>com.skilldistillery.allowance.entities.Bank</class>
+		<class>com.skilldistillery.allowance.entities.Allowance</class>
 		<!-- end entities -->
 
 		  <properties>
