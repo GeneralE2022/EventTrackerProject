@@ -18,6 +18,10 @@ A user can create, update, and delete allowance entries. They can also view a li
 * Using Spring's Entity Manager to easily access the database
 * How to perform basic CRUD operations on the database using the Spring Rest API
 * How to test and map controller routes with Postman
+* How to build out a working front end in Java Script
+* How to dynamically generate form and text elements in JS and display them in HTML
+* How to perform CRUD operations in JS
+* How to aggregate and display database information in JS
 
 ## API Routes
 ### View a list of all allowance entries
@@ -56,3 +60,5 @@ Mapping: allowances/{id}
 * Gradle
 * MySQL
 * MySQL workbench
+* Java Script
+* Bootstrap styling 
