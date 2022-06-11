@@ -32,7 +32,7 @@
 					<tbody>
 						<tr>
 							<th scope="row" id="idDiv"></th>
-							<td id="allowancesDiv"></td>
+							<td id="entryDiv"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -41,12 +41,23 @@
 
 				<table>
 					<tr>
+						<th scope="row" id="singleIdDiv"></th>
+						<td id="singleEntryDiv"></td>
+					</tr>
+
+					<tr>
+						<th scope="row" id="singleIdFormDiv"></th>
+						<td id="singleEntryFormDiv"></td>
+					</tr>
+
+
+					<tr>
 						<td>
 							<form name="addAllowanceForm">
 								<input type="number" name="entry" placeholder="New entry"><br>
 								<button name="submit">Add a new allowance</button>
 							</form>
-							<div id="singleAllowance"></div>
+							<div id="newestAllowance"></div>
 						</td>
 
 						<td>
@@ -54,12 +65,11 @@
 								<input type="number" name="allowanceId"><br>
 								<button name="lookupButton">Get Allowance entry by ID</button>
 							</form>
+							<div id="singleAllowance"></div>
 
-							
 						</td>
 					</tr>
 				</table>
-				<div align="center" id="output"></div>
 
 			</div>
 		</div>

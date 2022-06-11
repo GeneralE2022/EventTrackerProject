@@ -33,7 +33,7 @@ function sendNewAllowance(newAllowance) {
 			if (xhr.status === 200 || xhr.status === 201) {
 				let allowance = JSON.parse(xhr.responseText);
 				console.log(allowance);
-				displayAllowance(allowance);
+				displayAllowance(allowance, 'newestAllowance');
 			}
 		}
 	}
@@ -50,22 +50,25 @@ function getAllowance(allowanceId) {
 				let textAllowance = xhr.responseText;
 				let allowance = JSON.parse(textAllowance);
 				console.log(allowance.entry);
-				displayAllowance(allowance);
+				displayAllowance(allowance, 'singleAllowance');
 			} else {
 				console.log('Error making request ' + xhr.status);
+				alert("This entry does not exist, please enter a valid id.");
 			}
 		}
 	};
 	xhr.send();
 }
 
-function displayAllowance(allowance) {
-	let allowanceDiv = document.getElementById('singleAllowance');
+function displayAllowance(allowance, div) {
+	// let allowanceDiv = document.getElementById('singleAllowance');
+	let allowanceDiv = document.getElementById(div);
 	allowanceDiv.textContent = '';
 
 	let p = document.createElement('p');
 	p.textContent = 'Result: ' + allowance.entry;
 	allowanceDiv.appendChild(p);
+	loadAllowances();
 }
 
 function loadAllowances() {
@@ -86,9 +89,9 @@ function loadAllowances() {
 }
 
 function displayAllowances(allowances) {
-	let allowancesDiv = document.getElementById('allowancesDiv');
 	let idDiv = document.getElementById('idDiv');
-	allowancesDiv.textContent = '';
+	let entryDiv = document.getElementById('entryDiv');
+	entryDiv.textContent = '';
 	idDiv.textContent = '';
 
 	for (let allowance of allowances) {
@@ -99,27 +102,89 @@ function displayAllowances(allowances) {
 		pEntry.textContent = allowance.entry;
 
 		idDiv.appendChild(pId);
-		allowancesDiv.appendChild(pEntry);
+		entryDiv.appendChild(pEntry);
 
-		pEntry.addEventListener('click', function(id) {
+		pEntry.addEventListener('click', function() {
+			let singleIdDivLocation = document.getElementById('singleIdDiv');
+			let singleEntryDivLocation = document.getElementById('singleEntryDiv');
+
+			singleIdDivLocation.textContent = '';;
+			singleEntryDivLocation.textContent = '';
+
+			let pSingleId = document.createElement('p');
+			let pSingleEntry = document.createElement('p');
+
+			singleIdDivLocation.textContent = allowance.id;
+			singleEntryDivLocation.textContent = allowance.entry;
+
+			singleIdDivLocation.appendChild(pSingleId);
+			singleEntryDivLocation.appendChild(pSingleEntry);
+
+			// dynamically create update, delete buttons for single entry 
+
+			let br = document.getElementById('br');
+			let singleIdDivFormLocation = document.getElementById('singleIdFormDiv');
+			let singleEntryDivFormLocation = document.getElementById('singleEntryFormDiv');
+
+			// create the form, give it a name
+			let form = document.createElement('form');
+			form.name = 'updateForm';
+
+			// create an input field
+			let updateField = document.createElement('input');
+			updateField.name = 'updateField'; // assign a name attribute
+			updateField.type = 'number'; // assign a type attribute
+			updateField.placeholder = 'Update current entry'; // assign a placeholder attribute
+
+			// create a submit input
+			let submit = document.createElement('input');
+			submit.name = 'submit'; // assign a name attribute
+			submit.type = 'submit'; // assign a type attribute
+			submit.value = 'Update'; // assign a value attribute
+
+			submit.addEventListener('click', function(e) { // Assign an event listener to the submit button variable
+				e.preventDefault();
+				// let form = e.target.parentElement.updateField; 
+
+				let updatedAllowance = {
+					id: allowance.id,
+					entry: updateField.value
+				};
+
+				updateAllowance(updatedAllowance); 
+			});
+
+			// form.reset();
 			
-			window.location = 'details.html';
-			
-			let pId = document.createElement('p');
-			let pEntry = document.createElement('p');
+			// append the input to the form
+			form.appendChild(updateField);
 
-			pId.textContent = allowance.id;
-			pEntry.textContent = allowance.entry;
+			// add the input to the form
+			form.appendChild(submit);
 
-			idDiv.appendChild(pId);
-			allowancesDiv.appendChild(pEntry);
-
+			// add the form to the body
+			singleEntryDivFormLocation.appendChild(form);
+			// singleEntryDivFormLocation.appendChild(br);
 		});
 	}
 }
 
 
-
+function updateAllowance(allowance) {
+	let xhr = new XMLHttpRequest();
+	xhr.open('PUT', `api/allowances/${allowance.id}`);
+	console.log('ALLOWANCE ID: ' + allowance.id);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200 || xhr.status === 201) {
+				let allowance = JSON.parse(xhr.responseText);
+				console.log('UPDATED ALLOWANCE: ' + allowance.entry.value);
+			}
+		}
+	}
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.send(JSON.stringify(allowance));
+}
 
 
 
