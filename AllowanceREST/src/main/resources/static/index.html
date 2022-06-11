@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/script.js"></script>
+<!-- <script type="text/javascript" src="js/details.js"></script> -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm"></div>
+			<div class="col-8">
+
+				<h1>Allowance Tracker</h1>
+
+				<br> <br> <br>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Entry</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<th scope="row" id="idDiv"></th>
+							<td id="allowancesDiv"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<br> <br> <br>
+
+				<table>
+					<tr>
+						<td>
+							<form name="addAllowanceForm">
+								<input type="number" name="entry" placeholder="New entry"><br>
+								<button name="submit">Add a new allowance</button>
+							</form>
+							<div id="singleAllowance"></div>
+						</td>
+
+						<td>
+							<form name="allowanceFinderForm">
+								<input type="number" name="allowanceId"><br>
+								<button name="lookupButton">Get Allowance entry by ID</button>
+							</form>
+
+							
+						</td>
+					</tr>
+				</table>
+				<div align="center" id="output"></div>
+
+			</div>
+		</div>
+		<div class="col-sm"></div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</body>
+</html>

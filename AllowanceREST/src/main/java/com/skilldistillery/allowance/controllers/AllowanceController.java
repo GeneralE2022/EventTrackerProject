@@ -36,7 +36,7 @@ public class AllowanceController {
 	}
 	
 	@PostMapping("allowances")
-	public Allowance createAllowance(Allowance allowance, HttpServletResponse res) {
+	public Allowance createAllowance(@RequestBody Allowance allowance, HttpServletResponse res) {
 		return as.createAllowance(allowance); 
 	}
 	
