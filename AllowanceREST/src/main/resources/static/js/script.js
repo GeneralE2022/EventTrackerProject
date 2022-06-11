@@ -5,6 +5,7 @@ window.addEventListener('load', function(evt) {
 
 function init() {
 	loadAllowances();
+	totalEntries();
 
 	document.allowanceFinderForm.lookupButton.addEventListener('click', function(event) {
 		event.preventDefault();
@@ -16,12 +17,10 @@ function init() {
 
 	document.addAllowanceForm.submit.addEventListener('click', function(e) {
 		e.preventDefault();
-
 		let newEntry = addAllowanceForm.entry.value;
-
 		let newAllowance = { entry: newEntry };
-		console.log(newAllowance);
 		sendNewAllowance(newAllowance);
+		totalEntries();
 	});
 }
 
@@ -151,11 +150,11 @@ function displayAllowances(allowances) {
 					entry: updateField.value
 				};
 
-				updateAllowance(updatedAllowance); 
+				updateAllowance(updatedAllowance);
 			});
 
 			// form.reset();
-			
+
 			// append the input to the form
 			form.appendChild(updateField);
 
@@ -173,12 +172,10 @@ function displayAllowances(allowances) {
 function updateAllowance(allowance) {
 	let xhr = new XMLHttpRequest();
 	xhr.open('PUT', `api/allowances/${allowance.id}`);
-	console.log('ALLOWANCE ID: ' + allowance.id);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200 || xhr.status === 201) {
 				let allowance = JSON.parse(xhr.responseText);
-				console.log('UPDATED ALLOWANCE: ' + allowance.entry.value);
 			}
 		}
 	}
@@ -186,15 +183,39 @@ function updateAllowance(allowance) {
 	xhr.send(JSON.stringify(allowance));
 }
 
+function totalEntries() {
 
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", "api/allowances");
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				let allowances = JSON.parse(xhr.responseText);
 
+				document.totalsForm.totalsButton.addEventListener('click', function(event) {
+					event.preventDefault();
 
+					let totalEntriesDiv = document.getElementById('totalEntriesDiv');
+					totalEntriesDiv.textContent = '';
 
+					console.log('INSIDE TOTAL ENTRIES ' + allowances);
+					let size = Object.keys(allowances).length;
+					console.log('TOTAL ENTRIES: ' + size);
 
+					let p = document.createElement('p');
 
+					totalEntriesDiv.textContent = 'There are ' + size + ' entries in total.';
 
+					totalEntriesDiv.appendChild(p);
+				});
 
-
+			} else {
+				console.log('Error making request ' + xhr.status);
+			}
+		}
+	};
+	xhr.send();
+}
 
 
 
