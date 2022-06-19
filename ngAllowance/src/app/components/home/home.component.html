@@ -1,0 +1,73 @@
+<h1>Allowance Tracker</h1>
+<br /><br />
+<p>Click on any entry to modify it. </p>
+
+<h3>Bank Entries</h3>
+
+<div class="responsive">
+  <div class="row">
+    <div class="col"><h3>Amount</h3></div>
+    <div class="col"><h3>Type</h3></div>
+    <div class="col"><h3>Note</h3></div>
+    <div class="col"><h3>Date</h3></div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row" *ngFor="let data of bankEntries">
+    <div class="col"><p (click)="displayEntry(data)">{{ data.entry | currency}}</p></div>
+    <div class="col"><p (click)="displayEntry(data)">{{ data.type }}</p></div>
+    <div class="col"><p (click)="displayEntry(data)">{{ data.note }}</p></div>
+    <div class="col"><p>{{ data.createdDate | date}}</p></div>
+    <div class="col"><button class="btn btn-danger" (click)="deleteEntry(data.id)">X</button></div>
+
+  </div>
+  <br>
+  <hr>
+  <div class="row"><h5>Balance: {{calculateBalance() | currency}}</h5></div>
+<br><br>
+  <!-- create a new entry form  -->
+  <h4>Create a new allowance entry</h4>
+  <div class="row">
+    <form name="newTask" *ngIf="newEntry">
+
+      Amount <div class="col"><input class="col" type="text" name="entry" [(ngModel)]="newEntry.entry" /></div>
+      Type <div class="col"><input class="col" type="text" name="type" [(ngModel)]="newEntry.type" /></div>
+      Note <div class="col"><input class="col" type="text" name="note" [(ngModel)]="newEntry.note" /></div>
+
+      <button class="col btn btn-primary" (click)="addEntry(newEntry)">Add Entry</button>
+    </form>
+  </div>
+<br><br><hr>
+
+  <div class="row"><h5>Number of entries: {{calculateTotalEntries()}}</h5></div>
+
+  <div id="entryDetails" *ngIf="selected">
+    <h4>{{ selected.id }}</h4>
+    <h3>{{ selected.entry | currency}}</h3>
+    <p>{{ selected.type }}</p>
+    <p>{{ selected.note }}</p>
+    <button class="btn btn-outline-danger" (click)="displayHome()">Home</button>
+    <button class="btn btn-outline-primary" (click)="setEditEntry()">Edit</button>
+  </div>
+
+
+  <div id="entryEdit" *ngIf="editEntry">
+    <form class="form">
+      <label class="form-label" for="task">Entry</label>
+      <input class="form-control" type="text" name="entry" [(ngModel)]="editEntry.entry" /> <br />
+      <label class="form-label" for="type">Type</label>
+      <input class="form-control" type="text" name="type" [(ngModel)]="editEntry.type" />
+      <label class="form-label" for="note">Note</label>
+      <input class="form-control" type="text" name="note" [(ngModel)]="editEntry.note" />
+      <br />
+      <button class="btn btn-danger" (click)="editEntry = null">Cancel</button>
+      <button class="btn btn-primary" (click)="updateEntry(editEntry)">Save</button>
+    </form>
+  </div>
+
+
+</div>
+
+
+
+
