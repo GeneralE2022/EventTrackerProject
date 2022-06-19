@@ -23,6 +23,9 @@ DROP TABLE IF EXISTS `allowance` ;
 CREATE TABLE IF NOT EXISTS `allowance` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `entry` INT NOT NULL,
+  `createdDate` DATETIME NULL,
+  `note` VARCHAR(200) NULL,
+  `type` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +45,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `allowancedb`;
-INSERT INTO `allowance` (`id`, `entry`) VALUES (1, 5);
+INSERT INTO `allowance` (`id`, `entry`, `createdDate`, `note`, `type`) VALUES (1, 5, NULL, NULL, NULL);
 
 COMMIT;
 

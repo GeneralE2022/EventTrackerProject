@@ -33,6 +33,9 @@ public class AllowanceServiceImpl implements AllowanceService {
 	public Allowance updateAllowance(Allowance allowance, int id) {
 		Allowance existing = findAllowance(id);
 		existing.setEntry(allowance.getEntry());
+		existing.setNote(allowance.getNote());
+		existing.setType(allowance.getType());
+		existing.setCreatedDate(allowance.getCreatedDate());
 		return ar.save(existing);
 	}
 

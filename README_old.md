@@ -1,6 +1,6 @@
 ## Skill Distillery Java Full-Stack 16-Week Immersive Boot Camp
 
-# Week 13 Homework
+# Week 12 Homework
 
 # Kids' Allowance Tracker Project
 
@@ -20,9 +20,8 @@ A user can create, update, and delete allowance entries. They can also view a li
 * How to test and map controller routes with Postman
 * How to build out a working front end in Java Script
 * How to dynamically generate form and text elements in JS and display them in HTML
-* How to perform CRUD operations in Angular Typescript
-* How to aggregate and display database information in Angular Typescript
-* How to use Angular Pipes 
+* How to perform CRUD operations in JS
+* How to aggregate and display database information in JS
 
 ## API Routes
 ### View a list of all allowance entries
@@ -62,7 +61,4 @@ Mapping: allowances/{id}
 * MySQL
 * MySQL workbench
 * Java Script
-* Typescript
-* Angular
-* Bootstrap styling
-* Visual Studio Code
+* Bootstrap styling 
